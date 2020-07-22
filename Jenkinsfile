@@ -10,7 +10,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Testing jacoco'
+                jacoco exclusionPattern: '**/src/main/java', inclusionPattern: '**/*.class'
             }
         }
         stage('Deploy') {
