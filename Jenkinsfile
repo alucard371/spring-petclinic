@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    agent {
-        // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-        dockerfile true
-    }
-
     environment {
         CI='true'
     }
@@ -35,16 +30,16 @@ pipeline {
 
                     }
                 }
-         stage('Deploy for production') {
-            when {
-                branch 'production'
-            }
-            steps {
-                echo 'production branch'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+            stage('Deploy for production') {
+                when {
+                    branch 'production'
+                }
+                steps {
+                    echo 'production branch'
+                    input message: 'Finished using the web site? (Click "Proceed" to continue)'
 
+                }
             }
-        }
     }
 }
 
