@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        CI='true'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -16,26 +20,11 @@ pipeline {
                 jacoco exclusionPattern: '**/src/main/java', inclusionPattern: '**/*.class'
             }
         }
-         stage('Deliver for development') {
-                    when {
-                        branch 'development'
-                    }
-                    steps {
-                        echo 'development branch'
-                        input message: 'Finished using the web site? (Click "Proceed" to continue)'
-
-                    }
-                }
-                stage('Deploy for production') {
-                    when {
-                        branch 'production'
-                    }
-                    steps {
-                        echo 'production branch'
-                        input message: 'Finished using the web site? (Click "Proceed" to continue)'
-
-                    }
-                }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy step'
+            }
+        }
     }
 }
 
