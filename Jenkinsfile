@@ -1,11 +1,17 @@
 pipeline {
     agent any
 
+    environment {
+        CI='true'
+    }
+
     stages {
         stage('Build') {
             steps {
                 echo 'Building petclinic freestyle'
                 build 'petclinic-freestyle'
+                echo 'Deploying petclinic copyArtifact'
+                build 'patclinic-copyArtifact'
             }
         }
         stage('Test') {
@@ -16,8 +22,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying petclinic copyArtifact'
-                build 'patclinic-copyArtifact'
+                echo 'Deploy step'
             }
         }
     }
