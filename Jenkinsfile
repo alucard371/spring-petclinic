@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        CI='true'
-    }
-
     stages {
         stage('Build') {
             steps {
@@ -30,16 +26,16 @@ pipeline {
 
                     }
                 }
-            stage('Deploy for production') {
-                when {
-                    branch 'production'
-                }
-                steps {
-                    echo 'production branch'
-                    input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                stage('Deploy for production') {
+                    when {
+                        branch 'production'
+                    }
+                    steps {
+                        echo 'production branch'
+                        input message: 'Finished using the web site? (Click "Proceed" to continue)'
 
+                    }
                 }
-            }
     }
 }
 
